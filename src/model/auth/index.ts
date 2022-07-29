@@ -4,7 +4,7 @@ import { action, thunk,Thunk ,Action} from 'easy-peasy';
 
   
 
-interface AuthModel {
+export interface AuthModel {
     name: string;
     // addTodo: Action<AuthModel, any>;
     // saveTodo: Thunk<AuthModel, any>;
