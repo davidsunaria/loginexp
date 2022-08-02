@@ -1,12 +1,14 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useStoreState,useStoreActions } from '../../store';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-
+  let navigate = useNavigate();
   const login = useStoreActions((actions) => actions?.authModel?.login);
+  const isLogin = useStoreState((state) => state?.authModel?.loginValue);
   const {
     register,
     handleSubmit,
@@ -14,7 +16,11 @@ const LoginPage = () => {
   } = useForm();
   const onSubmit = async(data:any) => await login(data);
 
-
+  useEffect(() => {
+    if (isLogin){
+      navigate("/home");
+    }
+ },[isLogin]);
   return (
     <>
      
