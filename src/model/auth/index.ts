@@ -1,18 +1,23 @@
-import { action, thunk,Thunk ,Action} from 'easy-peasy';
-
-
-
-  
+import { action, thunk, Thunk, Action } from "easy-peasy";
+import { StoreModel } from "../";
+import { login } from "../../api";
+import { setToken } from "../../utils/services";
 
 export interface AuthModel {
-    name: string;
-    // addTodo: Action<AuthModel, any>;
-    // saveTodo: Thunk<AuthModel, any>;
-  }
+  // addTodo: Action<AuthModel, any>;
+  login: Thunk<AuthModel, any>;
+}
 
-const authModel:AuthModel = {
-    name: "raman",
- 
+const authModel: AuthModel = {
+  login: thunk<StoreModel, AuthModel>(async (actions, payload) => {
+    let response = await login(payload);
+    console.log("response", response);
+    if (response?.status === 200) {
+      setToken(response?.data?.access_token);
+    } else if (response?.status !== 200) {
+      alert("wrong email or password");
+    }
+  }),
 };
 
-export default authModel
+export default authModel;
