@@ -1,23 +1,25 @@
 import React, { Suspense } from "react";
 import { Route, Routes,  Navigate } from "react-router-dom";
 import { isLogin } from "../utils/services";
+import { useStoreState,useStoreActions } from '../store';
 const LoginPage = React.lazy(() => import("../Pages/Auth"));
 const Dashboard = React.lazy(() => import("../Pages/Dashboard"));
 const Home = React.lazy(() => import("../Pages/Home"));
 const UserData = React.lazy(() => import("../Pages/UserData"));
 
+
 const AppRouter: React.FC = (): JSX.Element => {
 
+  const loginValue = useStoreState((state) => state?.authModel?.loginValue);
+
   const PublicRoute = ({ children }: any) => {
-    console.log("1")
     const auth = isLogin();
-    return !auth ? children : <Navigate to="/home/dashboard" />;
+    return !auth && !loginValue ? children : <Navigate to="/home/dashboard" />;
   };
 
   function PrivateRoute({ children }: any) {
-    console.log("2")
     const auth = isLogin();
-    return auth ? children : <Navigate to="/login" />;
+    return auth && loginValue? children : <Navigate to="/login" />;
   }
 
   return (
