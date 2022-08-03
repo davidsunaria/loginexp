@@ -3,9 +3,13 @@ import { Routes, Route, Outlet ,NavLink, Link} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { useStoreState,useStoreActions } from '../../store';
 import NavDropdown from "react-bootstrap/NavDropdown";
+import Dashboard from "../Dashboard";
 
 const Home = () => {
+  const logout = useStoreActions((actions) => actions?.authModel?.logout);
+ 
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -30,10 +34,11 @@ const Home = () => {
                 </NavDropdown.Item>
               </NavDropdown> */}
             </Nav>
+            <button className="btn btn-danger" onClick={()=> logout(false)}>LogOut</button>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Outlet />
+      <Outlet /> 
     </>
   );
 };

@@ -9,11 +9,13 @@ const UserData = React.lazy(() => import("../Pages/UserData"));
 const AppRouter: React.FC = (): JSX.Element => {
 
   const PublicRoute = ({ children }: any) => {
+    console.log("1")
     const auth = isLogin();
-    return !auth ? children : <Navigate to="/home" />;
+    return !auth ? children : <Navigate to="/home/dashboard" />;
   };
 
   function PrivateRoute({ children }: any) {
+    console.log("2")
     const auth = isLogin();
     return auth ? children : <Navigate to="/login" />;
   }
@@ -29,6 +31,14 @@ const AppRouter: React.FC = (): JSX.Element => {
       </Routes> */}
 
       <Routes>
+      <Route
+          path="/"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
         <Route
           path="/login"
           element={

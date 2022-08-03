@@ -5,6 +5,9 @@ export const setToken = (payload: any) => {
 export const getToken = () => {
   return localStorage.getItem("token");
 };
+export const clearToken = () => {
+  localStorage.removeItem("token");
+};
 
 export const isLogin = () => {
   if (localStorage.getItem("token")) {
