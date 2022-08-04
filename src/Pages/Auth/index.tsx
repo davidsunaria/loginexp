@@ -16,17 +16,8 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async(data:any) => await login(data);
-  // console.log("login",isLogin)
   
-//   useEffect(() => {
-//     console.log("login",isLogin)
-//     if (isLogin){
-//       navigate("/home");
-//     }
-//     else{
-//       navigate("/login");
-//     }
-//  },[isLogin]);
+  
   return (
     <>
      
