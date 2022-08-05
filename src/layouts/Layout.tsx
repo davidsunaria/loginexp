@@ -14,15 +14,16 @@ const Layout = ({ children }: Props) => {
 
   useEffect(() => {
     if (loginValue) {
+      
       navigate("/home/dashboard");
     }
   }, [loginValue]);
 
-  console.log("isloggedin",loginValue)
+  console.log("islogged",loginValue)
   console.log("islogged out",isLoggedOut)
   useEffect(() => {
-    if (isLoggedOut) {
-        
+    if (isLoggedOut || isLogin()) {
+      console.log("hijhew")
       navigate("/login");
     }
   }, [isLoggedOut]);

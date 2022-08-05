@@ -1,8 +1,9 @@
 import { action, thunk, Thunk, Action } from "easy-peasy";
 import { StoreModel } from "../";
 import { login } from "../../api";
-import { setToken, clearToken } from "../../utils/services";
+import { setToken, clearToken ,isLogin} from "../../utils/services";
 import { toast } from "react-toastify";
+import store from "../../store";
 
 export interface AuthModel {
   // addTodo: Action<AuthModel, any>;
@@ -17,8 +18,8 @@ export interface AuthModel {
 }
 
 const authModel: AuthModel = {
-  loginValue: false,
-  isLoggedOut: false,
+  loginValue: isLogin()?true:false,
+  isLoggedOut: !isLogin()?true:false,
   name: "raman",
   setLogin: action((state, payload) => {
     state.loginValue = payload;
@@ -51,6 +52,9 @@ const authModel: AuthModel = {
       clearToken();
       await actions.setLogOut(payload);
       await actions.setLogin(false);
+      setTimeout(async () => {
+        await store.persist.clear();
+      }, 100)
     }
   ),
 };
