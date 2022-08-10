@@ -11,22 +11,28 @@ const Layout = ({ children }: Props) => {
   let navigate = useNavigate();
   const loginValue = useStoreState((state) => state?.authModel?.loginValue);
   const isLoggedOut = useStoreState((state) => state?.authModel?.isLoggedOut);
+  const isSignUp = useStoreState((state) => state?.authModel?.isSignUp);
 
   useEffect(() => {
     if (loginValue) {
-      
       navigate("/home/dashboard");
     }
   }, [loginValue]);
 
-  console.log("islogged",loginValue)
-  console.log("islogged out",isLoggedOut)
+  console.log("islogged", loginValue);
+  console.log("islogged out", isLoggedOut);
   useEffect(() => {
     if (isLoggedOut || isLogin()) {
-      console.log("hijhew")
+      console.log("hijhew");
       navigate("/login");
     }
   }, [isLoggedOut]);
+
+  useEffect(() => {
+    if (isSignUp) {
+      navigate("/login");
+    }
+  }, [isSignUp]);
 
   return (
     <>

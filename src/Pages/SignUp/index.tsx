@@ -6,21 +6,16 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 import {  Link } from "react-router-dom";
 
-const LoginPage = () => {
+const SignUp = () => {
   let navigate = useNavigate();
-  const login = useStoreActions((actions) => actions?.authModel?.login);
-  const setSignUp = useStoreActions((actions) => actions?.authModel?.setSignUp);
-  const isLogin = useStoreState((state) => state?.authModel?.loginValue);
+  const signup = useStoreActions((actions) => actions?.authModel?.signup);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = async(data:any) => await login(data);
+  const onSubmit = async(data:any) => await signup(data);
   
-  useEffect(()=>{
-    setSignUp(false)
-  },[])
   
   return (
     <>
@@ -29,7 +24,7 @@ const LoginPage = () => {
         <div className="row">
           <div className="col-md-4"></div>
           <div className="col-md-4">
-          <h1 className="bg-info mt-4 mb-4">Login page</h1>
+          <h1 className="bg-info mt-4 mb-4">SignUp here</h1>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -50,7 +45,7 @@ const LoginPage = () => {
               <Button variant="primary" className="mx-4" type="submit">
                 Submit
               </Button>
-              <Link to="/signup">Sign Up</Link>
+              {/* <Link to="">Sign Up</Link> */}
             </Form>
           </div>
           <div className="col-md-4"></div>
@@ -60,4 +55,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUp;

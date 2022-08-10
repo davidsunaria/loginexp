@@ -6,9 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import Layout from "../layouts/Layout";
 
 const LoginPage = React.lazy(() => import("../Pages/Auth"));
+const SignUp = React.lazy(() => import("../Pages/SignUp"));
 const Dashboard = React.lazy(() => import("../Pages/Dashboard"));
 const Home = React.lazy(() => import("../Pages/Home"));
 const UserData = React.lazy(() => import("../Pages/UserData"));
+const Product = React.lazy(() => import("../Pages/Product"));
+const ProductCategory = React.lazy(() => import("../Pages/ProductCategory"));
 
 const AppRouter: React.FC = (): JSX.Element => {
 
@@ -55,6 +58,14 @@ const AppRouter: React.FC = (): JSX.Element => {
               </PublicRoute>
             }
           />
+            <Route
+            path="/signup"
+            element={
+              <PublicRoute>
+                <SignUp />
+              </PublicRoute>
+            }
+          />
           <Route
             path="/home"
             element={
@@ -65,6 +76,8 @@ const AppRouter: React.FC = (): JSX.Element => {
           >
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="userdata" element={<UserData />} />
+            <Route path="ProductCategory" element={<ProductCategory />} />
+            <Route path="product" element={<Product />} />
           </Route>
         </Routes>
       </Suspense>

@@ -8,3 +8,12 @@ export const login = async (payload: any) => {
     return error?.response?.data;
   }
 };
+
+export const signup = async (payload: any) => {
+  try {
+    let response = await http.post("/auth/register", payload);
+    return response;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};

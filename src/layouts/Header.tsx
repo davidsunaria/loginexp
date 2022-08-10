@@ -21,7 +21,11 @@ const Header = () => {
               <Link to="/home/dashboard" className="mx-4">
                 Dashboard
               </Link>
-              <Link to="/home/userdata">UserData</Link>
+              <Link to="/home/userdata" className="mx-4">UserData</Link>
+              <Link to="/home/productcategory" className="mx-4">ProductCatagory</Link>
+              <Link to="/home/product">Product</Link>
+
+              
               {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
