@@ -16,3 +16,7 @@ export const isLogin = () => {
     return false;
   }
 };
+
+export const objectToQuery = (obj: any) => {
+  return (obj) ? Object.entries(obj).map(([k, v]: any) => `${k}=${encodeURIComponent(v)}`).join("&") : '';
+}

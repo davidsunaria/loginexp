@@ -1,5 +1,5 @@
-import React, { Suspense,useEffect } from "react";
-import { Route, Routes, Navigate ,useNavigate} from "react-router-dom";
+import React, { Suspense, useEffect } from "react";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { isLogin } from "../utils/services";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,10 +11,11 @@ const Dashboard = React.lazy(() => import("../Pages/Dashboard"));
 const Home = React.lazy(() => import("../Pages/Home"));
 const UserData = React.lazy(() => import("../Pages/UserData"));
 const Product = React.lazy(() => import("../Pages/Product"));
+const HomePage = React.lazy(() => import("../Pages/HomePage"));
+const About = React.lazy(() => import("../Pages/About"));
 const ProductCategory = React.lazy(() => import("../Pages/ProductCategory"));
 
 const AppRouter: React.FC = (): JSX.Element => {
-
   const PublicRoute = ({ children }: any) => {
     const auth = isLogin();
     return !auth ? children : <Navigate to="/home/dashboard" />;
@@ -22,12 +23,8 @@ const AppRouter: React.FC = (): JSX.Element => {
 
   function PrivateRoute({ children }: any) {
     const auth = isLogin();
-    return auth  ? children : <Navigate to="/login" />;
+    return auth ? children : <Navigate to="/login" />;
   }
-
-
-
-
 
   return (
     <Layout>
@@ -58,7 +55,7 @@ const AppRouter: React.FC = (): JSX.Element => {
               </PublicRoute>
             }
           />
-            <Route
+          <Route
             path="/signup"
             element={
               <PublicRoute>
@@ -66,6 +63,18 @@ const AppRouter: React.FC = (): JSX.Element => {
               </PublicRoute>
             }
           />
+
+          <Route
+            path="/homepage"
+            element={
+              <PrivateRoute>
+                <HomePage />
+              </PrivateRoute>
+            }
+          >
+            <Route path="about" element={<About />} />
+          </Route>
+
           <Route
             path="/home"
             element={

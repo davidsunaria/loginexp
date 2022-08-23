@@ -1,9 +1,13 @@
-import { createStore, createTypedHooks, action, persist } from 'easy-peasy';
+import { createStore, createTypedHooks, action, persist, PersistStorage } from 'easy-peasy';
 import storeModel, { StoreModel } from '../model';
 
-
-
-const store = createStore<StoreModel>(persist(storeModel));
+interface storageType  {
+    storage :'localStorage' | 'sessionStorage' | PersistStorage;
+}
+let StorageValue :storageType = {
+    storage: 'localStorage'
+}
+const store = createStore<StoreModel,storageType>(persist(storeModel,StorageValue));
 
 export default store
 

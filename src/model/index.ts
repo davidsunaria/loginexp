@@ -1,12 +1,15 @@
 import authModel,{AuthModel} from "./auth"
+import productModel,{ProductModel} from "./product"
 
 export interface StoreModel{
-    authModel:AuthModel
+    authModel:AuthModel,
+    productModel:ProductModel
 }
 
 const storeModel:StoreModel={
     
-    authModel
+    authModel,
+    productModel
 }
 
 export default storeModel

@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect } from "react";
 import Header from "./Header";
-import { useStoreState } from "../store";
+import CustomerHeader from "./CustomerHeader";
+import { useStoreState, useStoreActions } from "../store";
 import { useNavigate } from "react-router-dom";
 import { isLogin } from "../utils/services";
 
@@ -12,19 +13,26 @@ const Layout = ({ children }: Props) => {
   const loginValue = useStoreState((state) => state?.authModel?.loginValue);
   const isLoggedOut = useStoreState((state) => state?.authModel?.isLoggedOut);
   const isSignUp = useStoreState((state) => state?.authModel?.isSignUp);
+  const accountType = useStoreState((state) => state?.authModel?.accountType);
 
+  
   useEffect(() => {
-    if (loginValue) {
+    if (loginValue && accountType === "customer") {
+      navigate("/homepage/about");
+    }
+    if (loginValue && accountType === "seller") {
       navigate("/home/dashboard");
+    }
+    if (!loginValue) {
+      navigate("/login");
     }
   }, [loginValue]);
 
-  console.log("islogged", loginValue);
-  console.log("islogged out", isLoggedOut);
   useEffect(() => {
     if (isLoggedOut || isLogin()) {
-      console.log("hijhew");
-      navigate("/login");
+      if (!loginValue) {
+        navigate("/login");
+      }
     }
   }, [isLoggedOut]);
 
@@ -36,7 +44,8 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      {isLogin() && <Header />}
+      {isLogin() && accountType === "seller" && <Header />}
+      {isLogin() && accountType === "customer" && <CustomerHeader />}
       {children}
     </>
   );
