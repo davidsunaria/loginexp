@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useForm } from "react-hook-form";
 import moment from "moment";
 import { useStoreState, useStoreActions } from "../../store";
+import {  Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -92,7 +93,7 @@ const ProductCategory = () => {
                       <Card.Text>
                         <b>Created At:</b> {val?.createdAt}
                       </Card.Text>
-                      <Button variant="primary">Go somewhere</Button>
+                      <Link to={`/home/product/${val?.productCatagoryName}`}> <Button variant="warning"> Add Products</Button></Link>
                     </Card.Body>
                   </Card>
                 </div>

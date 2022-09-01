@@ -29,6 +29,16 @@ export const addCatagory = async (payload: any) => {
   }
 };
 
+
+export const addProduct = async (payload: any) => {
+  try {
+    let response = await http.post("/auth/addproduct", payload);
+    return response;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};
+
 // export const getCatagory = async () => {
 //   try {
 //     let response = await http.get("/auth/getcatagory");
@@ -41,12 +51,6 @@ export const addCatagory = async (payload: any) => {
 export const getCatagory = async (formData: any): Promise<any> => {
  // let queryString="";
   const { url, payload } = formData;
-  console.log("url",url)
-  console.log("payload",payload)
-  // if(payload){
-  //  queryString =  objectToQuery(payload);
-  // }
-  // console.log("queryString",queryString)
   try {
     const response = await http.get(`${url}?email=${payload?.email}`);
     return response?.data;
@@ -54,5 +58,45 @@ export const getCatagory = async (formData: any): Promise<any> => {
     return error?.response?.data;
   }
 };
+
+export const getSelectedCategory = async (formData: any): Promise<any> => {
+  // let queryString="";
+   const { url, payload } = formData;
+   console.log("api payload",payload?.category)
+   try {
+     const response = await http.get(`${url}?category=${payload?.category}`);
+     return response?.data;
+   } catch (error: any) {
+     return error?.response?.data;
+   }
+ };
+
+export const getCustomerCategory = async (formData: any): Promise<any> => {
+  // let queryString="";
+   const { url, payload } = formData;
+   try {
+     const response = await http.get(`${url}`);
+     return response?.data;
+   } catch (error: any) {
+     return error?.response?.data;
+   }
+ };
+
+export const getProducts = async (formData: any): Promise<any> => {
+  // let queryString="";
+   const { url, payload } = formData;
+   console.log("url",url)
+   console.log("payload",payload)
+   // if(payload){
+   //  queryString =  objectToQuery(payload);
+   // }
+   // console.log("queryString",queryString)
+   try {
+     const response = await http.get(`${url}?email=${payload?.email}&category=${payload?.category}`);
+     return response?.data;
+   } catch (error: any) {
+     return error?.response?.data;
+   }
+ };
 
 

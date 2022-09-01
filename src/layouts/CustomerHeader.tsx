@@ -21,6 +21,9 @@ const CustomerHeader = () => {
               <Link to="/homePage/about" className="mx-4">
                 About us
               </Link>
+              <Link to="/homePage/shop" className="mx-4">
+                Shop
+              </Link>
             </Nav>
             <button className="btn btn-danger" onClick={() => logout(true)}>
               LogOut

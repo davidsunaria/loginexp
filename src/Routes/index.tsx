@@ -13,6 +13,7 @@ const UserData = React.lazy(() => import("../Pages/UserData"));
 const Product = React.lazy(() => import("../Pages/Product"));
 const HomePage = React.lazy(() => import("../Pages/HomePage"));
 const About = React.lazy(() => import("../Pages/About"));
+const Shop = React.lazy(() => import("../Pages/Shop"));
 const ProductCategory = React.lazy(() => import("../Pages/ProductCategory"));
 
 const AppRouter: React.FC = (): JSX.Element => {
@@ -73,6 +74,7 @@ const AppRouter: React.FC = (): JSX.Element => {
             }
           >
             <Route path="about" element={<About />} />
+            <Route path="shop" element={<Shop />} />
           </Route>
 
           <Route
@@ -86,7 +88,7 @@ const AppRouter: React.FC = (): JSX.Element => {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="userdata" element={<UserData />} />
             <Route path="ProductCategory" element={<ProductCategory />} />
-            <Route path="product" element={<Product />} />
+            <Route path="product/:category" element={<Product />} />
           </Route>
         </Routes>
       </Suspense>
