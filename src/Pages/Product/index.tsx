@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
@@ -8,9 +8,11 @@ import * as yup from "yup";
 import moment from "moment";
 import Card from "react-bootstrap/Card";
 import { useStoreState, useStoreActions } from "../../store";
+import Badge from "react-bootstrap/Badge";
 
 const Product = () => {
   const { category } = useParams();
+  const [productCount, setProductCount] = useState(0);
   const schema = yup
     .object()
     .shape({
@@ -28,7 +30,6 @@ const Product = () => {
     (actions) => actions?.productModel?.getProducts
   );
 
-  
   const {
     register,
     handleSubmit,
@@ -41,22 +42,34 @@ const Product = () => {
   const onSubmit = async (data: any) => {
     data.createdAt = moment().format("MMMM Do YYYY, h:mm:ss a");
     data.email = email;
-    data.category=category
-    console.log("data",data)
-    await addProduct(data)
+    data.category = category;
+    console.log("data", data);
+    await addProduct(data);
     reset();
-    let payload = { email: email ,category:category};
+    let payload = { email: email, category: category };
     getProducts({ url: "/auth/getproducts", payload });
   };
 
   useEffect(() => {
-    let payload = { email: email ,category:category};
+    let payload = { email: email, category: category };
     getProducts({ url: "/auth/getproducts", payload });
   }, []);
-console.log("products",product)
+
+  const increment = () => {
+    setProductCount((_: number) => _ + 1);
+  };
+  const decrement = () => {
+    setProductCount((_: number) => _ - 1);
+  };
+  const updateStock = (data: any) => {
+    data.count = productCount;
+    console.log("data", data);
+  };
+  console.log("products", product);
   return (
     <>
-      <h1>Add {category?.replace(/^./, str => str.toUpperCase())}</h1>
+      <h1>{productCount}</h1>
+      <h1>Add {category?.replace(/^./, (str) => str.toUpperCase())}</h1>
       <div className="container">
         <div className="row">
           <div className="col-md-4"></div>
@@ -113,6 +126,26 @@ console.log("products",product)
                       <Card.Text>
                         <b>Created At:</b> {val?.createdAt}
                       </Card.Text>
+                      <i
+                        className="bi bi-patch-plus-fill text-success mx-3"
+                        style={{ fontSize: 25 }}
+                        onClick={increment}
+                      ></i>
+                      <Badge pill bg="primary">
+                        Primary
+                      </Badge>
+                      <i
+                        className="bi bi-patch-minus-fill text-info mx-3"
+                        style={{ fontSize: 25 }}
+                        onClick={decrement}
+                      ></i>
+                      <br />
+                      <button
+                        className=" btn btn-sm btn-warning"
+                        onClick={() => updateStock(val)}
+                      >
+                        quantity update
+                      </button>
                     </Card.Body>
                   </Card>
                 </div>

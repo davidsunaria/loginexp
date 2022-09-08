@@ -40,3 +40,9 @@
     transform: rotate(360deg);
   }
 }
+
+.cart-count{
+  border-radius: 100px !important;
+  font-size: 10px !important;
+  margin-bottom: 19px !important;
+}

@@ -71,7 +71,7 @@ export const getSelectedCategory = async (formData: any): Promise<any> => {
    }
  };
 
-export const getCustomerCategory = async (formData: any): Promise<any> => {
+export const getCustomerCategory = async (formData: any): Promise<any> => { 
   // let queryString="";
    const { url, payload } = formData;
    try {
@@ -98,5 +98,17 @@ export const getProducts = async (formData: any): Promise<any> => {
      return error?.response?.data;
    }
  };
+
+ export const getCustomerFilterProducts = async (formData: any): Promise<any> => {
+  // let queryString="";
+   const { url, payload } = formData;
+   try {
+     const response = await http.get(`${url}?category=${payload?.category}`);
+     return response?.data;
+   } catch (error: any) {
+     return error?.response?.data;
+   }
+ };
+
 
 

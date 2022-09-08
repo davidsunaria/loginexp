@@ -15,6 +15,7 @@ const HomePage = React.lazy(() => import("../Pages/HomePage"));
 const About = React.lazy(() => import("../Pages/About"));
 const Shop = React.lazy(() => import("../Pages/Shop"));
 const ProductCategory = React.lazy(() => import("../Pages/ProductCategory"));
+const CustomerProducts = React.lazy(() => import("../Pages/CustomerProducts"));
 
 const AppRouter: React.FC = (): JSX.Element => {
   const PublicRoute = ({ children }: any) => {
@@ -75,6 +76,7 @@ const AppRouter: React.FC = (): JSX.Element => {
           >
             <Route path="about" element={<About />} />
             <Route path="shop" element={<Shop />} />
+            <Route path="product/:category" element={<CustomerProducts />} />
           </Route>
 
           <Route

@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useStoreActions } from "../store";
+import Badge from 'react-bootstrap/Badge';
 
 
 
@@ -22,10 +23,13 @@ const CustomerHeader = () => {
                 About us
               </Link>
               <Link to="/homePage/shop" className="mx-4">
-                Shop
+                Categories
               </Link>
+             
             </Nav>
-            <button className="btn btn-danger" onClick={() => logout(true)}>
+            <i className="bi bi-cart-plus-fill" style={{ fontSize: 25 }}> </i>
+            <Badge bg="secondary" className="cart-count">9</Badge>
+            <button className="btn btn-danger  mx-4" onClick={() => logout(true)}>
               LogOut
             </button>
           </Navbar.Collapse>
